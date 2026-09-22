@@ -4,8 +4,6 @@
 secure, expiry, and exact Container matching before returning cookies for an
 absolute HTTP(S) URL.
 
-There is no Chromium, Chrome, or Edge implementation.
-
 * Configuration
 
 Load the Firefox implementation once in your Emacs configuration and select a
@@ -34,14 +32,3 @@ Website packages can accept this function without depending on Firefox:
 Any replacement cookie function only needs to accept one absolute HTTP(S) URL
 and return the same alist shape.
 
-* Security
-
-Cookie values are credentials.  This package does not log them, persist a
-second cookie jar, or send network requests.  Callers decide where cookies are
-sent.  The live SQLite database is attached read-only; a private temporary
-database/WAL snapshot is used only when direct reading fails and is deleted
-immediately afterwards.
-
-* License
-
-GNU General Public License, version 3 or later.
