@@ -1,5 +1,5 @@
 {
-  description = "Read cookies from browser profiles in Emacs";
+  description = "Read cookies from Firefox profiles in Emacs";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -13,7 +13,7 @@
           pkgs = nixpkgs.legacyPackages.${system};
         in {
           default = pkgs.emacsPackages.trivialBuild {
-            pname = "browser-cookies";
+            pname = "firefox-cookies";
             version = "0.1.0";
             src = self;
           };
@@ -23,18 +23,18 @@
         let
           pkgs = nixpkgs.legacyPackages.${system};
         in {
-          tests = pkgs.runCommand "browser-cookies-tests" {
+          tests = pkgs.runCommand "firefox-cookies-tests" {
             nativeBuildInputs = [ pkgs.emacs ];
           } ''
             cp -R ${self} source
             chmod -R u+w source
             cd source
             emacs --batch -Q -L . -L test \
-              -l test/browser-cookies-test.el \
+              -l test/firefox-cookies-test.el \
               -f ert-run-tests-batch-and-exit
             emacs --batch -Q -L . \
               --eval '(setq byte-compile-error-on-warn t)' \
-              -f batch-byte-compile browser-cookies.el
+              -f batch-byte-compile firefox-cookies.el
             touch $out
           '';
         });
